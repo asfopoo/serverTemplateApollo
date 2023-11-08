@@ -4,7 +4,8 @@ services:
     ports:
       - "4000:4000"
     volumes:
-      - .:/code
+      - .:/usr/src/app  # Bind your local code to the container
+      - ./nodemon.json:/usr/src/app/nodemon.json  # Bind Nodemon config to the container
     depends_on:
       db:
         condition: service_healthy

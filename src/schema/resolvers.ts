@@ -1,8 +1,8 @@
-import db from '../db';
+// import db from '../db';
 
 const books = [
     {
-      title: 'The Awakeningssss',
+      title: 'The Awakenings',
       author: 'Kate Chopin',
     },
     {
@@ -14,7 +14,7 @@ const books = [
 const resolvers = {
     Query: {
       persons: () => {
-        return db.select().from('persons');
+        // return db.select().from('persons');
       },
       books: () => {
         return books;
