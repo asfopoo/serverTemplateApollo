@@ -5,6 +5,8 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 RUN npm install
+
 COPY . .
+
 EXPOSE 4000
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "start" ]

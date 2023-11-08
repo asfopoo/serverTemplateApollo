@@ -2,7 +2,7 @@ services:
   server:
     build: .
     ports:
-      - "8000:4000"
+      - "4000:4000"
     volumes:
       - .:/code
     depends_on:

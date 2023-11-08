@@ -4,6 +4,14 @@
 const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
+  type Persons {
+    personid: Int!
+    lastname: String!
+    firstname: String!
+    address: String!
+    city: String!
+  }
+
   # This "Book" type defines the queryable fields for every book in our data source.
   type Book {
     title: String
@@ -16,6 +24,7 @@ const typeDefs = `#graphql
   type Query {
     books: [Book]
     context: String
+    persons: [Persons]
   }
 `;
 

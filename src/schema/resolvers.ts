@@ -1,6 +1,8 @@
+import db from '../db';
+
 const books = [
     {
-      title: 'The Awakening',
+      title: 'The Awakeningssss',
       author: 'Kate Chopin',
     },
     {
@@ -9,12 +11,15 @@ const books = [
     },
   ];
 
-  // Resolvers define how to fetch the types defined in your schema.
-// This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
-      books: () => books,
-      context: (_parent, _args, context) => {
+      persons: () => {
+        return db.select().from('persons');
+      },
+      books: () => {
+        return books;
+      },
+      context: (_parent: any, _args: any, context: any) => {
         return context?.token;
       }
     },
