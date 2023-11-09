@@ -1,22 +1,24 @@
-const config = {
-    DATABASE_URL: 'postgres://postgres:password@localhost:5432/postgres',
-    DB_HOST: 'localhost',
-    DB_PORT: 5432,
-    DB_USER: 'postgres',
-    DB_NAME: 'postgres',
-    DB_PASSWORD: 'password',
-  };
+import knex from 'knex';
 
-const db = require('knex')({
-    client: 'pg',
-    connection: {
-      connectionString: config.DATABASE_URL,
-      host: config["DB_HOST"],
-      port: config["DB_PORT"],
-      user: config["DB_USER"],
-      database: config["DB_NAME"],
-      password: config["DB_PASSWORD"],
-    }
-  });
+const DB_CONSTANTS = {
+  DATABASE_URL: 'postgres://postgres:password@db:5432/postgres',
+  DB_PORT: 5432,
+  DB_USER: 'postgres',
+  DB_NAME: 'postgres',
+  DB_PASSWORD: 'password',
+};
+
+const config = {
+  client: 'pg',
+  connection: { 
+    host : 'db', // from docker-compose.yml
+    user : DB_CONSTANTS.DB_USER, 
+    password : DB_CONSTANTS.DB_PASSWORD,  
+    database : DB_CONSTANTS.DB_NAME,
+  },
+}
+
+  const db = knex(config)
+
 
   export default db;

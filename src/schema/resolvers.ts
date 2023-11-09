@@ -1,4 +1,4 @@
-// import db from '../db';
+import db from '../db.js';
 
 const books = [
     {
@@ -14,7 +14,7 @@ const books = [
 const resolvers = {
     Query: {
       persons: () => {
-        // return db.select().from('persons');
+        return db.select().from('persons');
       },
       books: () => {
         return books;

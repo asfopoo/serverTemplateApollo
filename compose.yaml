@@ -1,8 +1,10 @@
 services:
-  server:
+  api:
     build: .
     ports:
       - "4000:4000"
+    environment:
+      DB_HOST: host.docker.internal
     volumes:
       - .:/usr/src/app  # Bind your local code to the container
       - ./nodemon.json:/usr/src/app/nodemon.json  # Bind Nodemon config to the container
@@ -16,6 +18,8 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
     volumes:
        - ./data:/var/lib/postgresql/data
     healthcheck:
