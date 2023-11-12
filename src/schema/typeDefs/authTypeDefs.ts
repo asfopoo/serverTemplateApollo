@@ -4,8 +4,8 @@ const typeDefs = `#graphql
 
   ${types}
 
-  type Query {
-    register(emailL: String!, lastname: String!, firstname: String!, password: String!): [User]
+  type Mutation {
+    register(email: String!, lastname: String!, firstname: String!, password: String!): [User]
     login(email: String!, password: String!): [User]
   }
 `;

@@ -1,11 +1,14 @@
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
+import { applyMiddleware } from "graphql-middleware";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
+import shield from './schema/shield.js';
 import resolvers from './schema/resolvers/mergeResolvers.js';
 import typeDefs from './schema/typeDefs/mergeTypeDefs.js';
 
@@ -19,12 +22,15 @@ interface MyContext {
   // Below, we tell Apollo Server to "drain" this httpServer,
   // enabling our servers to shut down gracefully.
   const httpServer = http.createServer(app);
+
+  // shield the schema
+  const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const schemaWithPermissions = applyMiddleware(schema, shield);
   
   // Same ApolloServer initialization as before, plus the drain plugin
   // for our httpServer.
   const server = new ApolloServer<MyContext>({
-    typeDefs,
-    resolvers,
+    schema: schemaWithPermissions,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   // Ensure we wait for our server to start

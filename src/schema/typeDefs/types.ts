@@ -4,8 +4,7 @@ type User {
     personid: Int!
     lastname: String!
     firstname: String!
-    address: String!
-    city: String!
+    email: String!
   }
 
 `;
