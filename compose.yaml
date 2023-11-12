@@ -32,3 +32,14 @@ services:
     restart: always
     ports:
       - 8080:8080
+  migration:
+    build:
+      context: .
+      dockerfile: migrations/Dockerfile
+    environment:
+      DB_HOST: db
+    command: sh -c "npm install &&  chmod +x /usr/src/app/migrations/wait-for-db.sh && /usr/src/app/migrations/wait-for-db.sh && npm run migrate:latest"
+    restart: on-failure
+    depends_on:
+      - db
+    
