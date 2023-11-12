@@ -5,8 +5,9 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import typeDefs from './schema/typeDefs.js';
-import resolvers from './schema/resolvers.js';
+
+import resolvers from './schema/resolvers/mergeResolvers.js';
+import typeDefs from './schema/typeDefs/mergeTypeDefs.js';
 
 interface MyContext {
     token?: string;

@@ -1,17 +1,26 @@
 exports.up = async function (knex) {
-  const tableExists = await knex.schema.hasTable("your_table_name");
+  const tableName = 'user';
+  const tableExists = await knex.schema.hasTable(tableName);
 
   if (!tableExists) {
-    return knex.schema.createTable("your_table_name", function (table) {
-      // Define your table columns and constraints here
-      table.increments("id").primary();
-      table.string("name");
-      // ... other columns
+    return knex.schema.createTable(tableName, function (table) {
+     // Primary key
+    table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
+
+    // Other columns
+    table.string('email').notNullable().unique();
+    table.string('first_name');
+    table.string('last_name');
+
+    // Timestamps automatically adds created_at and updated_at columns
+    table.timestamps(true, true);
     });
   }
 };
 
-exports.down = function (knex) {
-  // Rollback logic, if needed
-  return knex.schema.dropTableIfExists("your_table_name");
+exports.down = async function (knex) {
+  // Rollback logic
+  const tableName = 'user';
+  const tableExists = await knex.schema.hasTable(tableName);
+  if (tableExists) return knex.schema.dropTableIfExists(tableName);
 };
