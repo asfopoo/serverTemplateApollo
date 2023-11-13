@@ -1,10 +1,24 @@
 const types = `#graphql
 
 type User {
-    personid: Int!
-    lastname: String!
-    firstname: String!
+    id: String!
+    last_name: String!
+    first_name: String!
     email: String!
+  }
+
+  type AuthToken {
+    authToken: String!
+  }
+
+  type RefreshToken {
+    refreshToken: String!
+  }
+
+  type UserLoginResponse {
+    user: User!
+    authToken: String!
+    refreshToken: String!
   }
 
 `;

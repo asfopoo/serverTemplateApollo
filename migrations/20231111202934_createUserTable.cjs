@@ -1,5 +1,6 @@
+const tableName = 'user';
+
 exports.up = async function (knex) {
-  const tableName = 'user';
   const tableExists = await knex.schema.hasTable(tableName);
 
   if (!tableExists) {
@@ -19,8 +20,6 @@ exports.up = async function (knex) {
 };
 
 exports.down = async function (knex) {
-  // Rollback logic
-  const tableName = 'user';
   const tableExists = await knex.schema.hasTable(tableName);
   if (tableExists) return knex.schema.dropTableIfExists(tableName);
 };
