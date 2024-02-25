@@ -7,6 +7,7 @@ export const isAuthenticated = rule()(async (parent, args, ctx, info) => {
   const token = ctx.req.headers?.token;
   try {
     const decoded = jwt.verify(token, privateKey);
+    console.log('jwt decoded: ', decoded);
     if (decoded) {
       return true;
     } else {
